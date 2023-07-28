@@ -24,12 +24,7 @@ public_users.post("/register", (req,res) => {
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
-  //if (Object.keys(books[1].reviews).length === 0 || books[1].reviews.hasOwnProperty(userParam)) {
-    //    bookDetails.userParam = newReview;
-    //}
-    return res.send()
-    //return res.send("A review has been added by " + userParam + "to " + books[isbn].author);
-  //return res.send(JSON.stringify(books,null,4));
+  return res.send(JSON.stringify(books,null,4));
 
 });
 
@@ -88,7 +83,7 @@ public_users.get('/title/:title',function (req, res) {
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
   const isbn = req.params.isbn;
-  return res.send(books[1].reviews);
+  return res.send(books[isbn].reviews);
 });
 
 module.exports.general = public_users;
