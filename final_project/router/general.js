@@ -35,8 +35,11 @@ public_users.get('/isbn/:isbn',function (req, res) {
   return res.send(books[isbn]);
  });
 
-// Function to find book details based on author
-function findBookfromAuthor(books,authorParam){
+
+// Get book details based on author
+public_users.get('/author/:author',function (req, res) {
+  //Write your code here
+  const authorParam = req.params.author;
     // Iterate through 'books' array
     for (let i = 1; i < 10; i++) {
         let author = books[i]?.author.replace(/ /g,"");
@@ -46,37 +49,29 @@ function findBookfromAuthor(books,authorParam){
     }
 
     if (typeof bookAuthor === 'undefined') {
-        return "Author is not found."
+        return res.send("Author is not found.")
     } else {
-        return bookAuthor
+        return res.send(bookAuthor)
     }
-}
-// Get book details based on author
-public_users.get('/author/:author',function (req, res) {
-  //Write your code here
-  return res.send(findBookfromAuthor(books,req.params.author));
 });
 
-// Function to find book details based on author
-function findBookfromTitle(books,titleParam){
-    // Iterate through 'books' array
-    for (let i = 1; i < 10; i++) {
-        let title = books[i]?.title.replace(/ /g,"");
-        if(title === titleParam) {
-            bookFound = books[i];
-        } 
-    }
 
-    if (typeof bookFound === 'undefined') {
-        return "Title is not found."
-    } else {
-        return bookFound
-    }
-}
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
-  return res.send(findBookfromTitle(books,req.params.title));
+  const titleParam = req.params.title;
+  for (let i = 1; i < 10; i++) {
+    let title = books[i]?.title.replace(/ /g,"");
+    if(title === titleParam) {
+        bookFound = books[i];
+    } 
+   }
+
+    if (typeof bookFound === 'undefined') {
+        return res.send("Title is not found.")
+    } else {
+        return res.send(bookFound)
+    }
 });
 
 //  Get book review
